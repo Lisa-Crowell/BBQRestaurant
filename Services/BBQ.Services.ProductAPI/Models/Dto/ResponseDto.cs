@@ -1,6 +1,4 @@
-﻿
-
-namespace BBQ.Services.ProductAPI.Models;
+﻿namespace BBQ.Services.ProductAPI.Models;
 
 public class ResponseDto
 {
