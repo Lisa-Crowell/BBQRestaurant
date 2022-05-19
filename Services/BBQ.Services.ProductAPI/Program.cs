@@ -1,4 +1,3 @@
-using AutoMapper;
 using BBQ.Services.ProductAPI;
 using BBQ.Services.ProductAPI.DbContexts;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +13,11 @@ builder.Services.AddSwaggerGen();
 
 // get the connection string
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // add mapping configurations
-IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+var mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
@@ -36,4 +36,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
