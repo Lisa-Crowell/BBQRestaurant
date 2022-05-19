@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 using BBQ.Web.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BBQ.Web.Controllers;
 
