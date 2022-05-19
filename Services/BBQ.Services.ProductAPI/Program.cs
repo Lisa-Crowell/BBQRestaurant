@@ -1,5 +1,6 @@
 using BBQ.Services.ProductAPI;
 using BBQ.Services.ProductAPI.DbContexts;
+using BBQ.Services.ProductAPI.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // add mapping configurations
 var mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 
