@@ -1,6 +1,7 @@
 ﻿using BBQ.Services.ProductAPI.Models;
 using BBQ.Services.ProductAPI.Models.Dto;
 using BBQ.Services.ProductAPI.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BBQ.Services.ProductAPI.Controllers;
@@ -55,6 +56,7 @@ public class ProductAPIController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<object> Post([FromBody] ProductDto productDto)
     {
         try
@@ -73,6 +75,7 @@ public class ProductAPIController : ControllerBase
     }
 
     [HttpPut]
+    [Authorize]
     public async Task<object> Put([FromBody] ProductDto productDto)
     {
         try
@@ -91,6 +94,8 @@ public class ProductAPIController : ControllerBase
     }
 
     [HttpDelete]
+    [Authorize(Roles = "Admin")]
+    [Route("{id}")]
     public async Task<object> Delete(int id)
     {
         try
