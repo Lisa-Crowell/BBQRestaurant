@@ -1,58 +1,110 @@
 ﻿using BBQ.Services.ProductAPI.Models;
 using BBQ.Services.ProductAPI.Models.Dto;
 using BBQ.Services.ProductAPI.Repository;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace BBQ.Services.ProductAPI.Controllers
+namespace BBQ.Services.ProductAPI.Controllers;
+
+[Route("api/products")]
+public class ProductAPIController : ControllerBase
 {
-    [Route("api/products")]
-    public class ProductAPIController : ControllerBase
-    {
-        protected ResponseDto _response;
-        private IProductRepository _productRepository;
+    private readonly IProductRepository _productRepository;
+    protected ResponseDto _response;
 
-        public ProductAPIController(IProductRepository productRepository)
+    public ProductAPIController(IProductRepository productRepository)
+    {
+        _productRepository = productRepository;
+        _response = new ResponseDto();
+    }
+
+    [HttpGet]
+    public async Task<object> Get()
+    {
+        try
         {
-            _productRepository = productRepository;
-            this._response = new ResponseDto();
+            var productDtos = await _productRepository.GetProducts();
+            _response.Result = productDtos;
         }
-        [HttpGet]
-        public async Task<object> Get()
+        catch (Exception ex)
         {
-            try
-            {
-                IEnumerable<ProductDto> productDtos = await _productRepository.GetProducts();
-                _response.Result = productDtos;
-            }
-            catch(Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.ErrorMessages
-                    = new List<string>() { ex.ToString() };
-            }
-            return _response;
+            _response.IsSuccess = false;
+            _response.ErrorMessages
+                = new List<string> {ex.ToString()};
         }
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<object> Get(int id)
+
+        return _response;
+    }
+
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<object> Get(int id)
+    {
+        try
         {
-            try
-            {
-                ProductDto productDto = await _productRepository.GetProductById(id);
-                _response.Result = productDto;
-            }
-            catch(Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.ErrorMessages
-                    = new List<string>() { ex.ToString() };
-            }
-            return _response;
+            var productDto = await _productRepository.GetProductById(id);
+            _response.Result = productDto;
         }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessages
+                = new List<string> {ex.ToString()};
+        }
+
+        return _response;
+    }
+
+    [HttpPost]
+    public async Task<object> Post([FromBody] ProductDto productDto)
+    {
+        try
+        {
+            var model = await _productRepository.CreateUpdateProduct(productDto);
+            _response.Result = model;
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessages
+                = new List<string> {ex.ToString()};
+        }
+
+        return _response;
+    }
+
+    [HttpPut]
+    public async Task<object> Put([FromBody] ProductDto productDto)
+    {
+        try
+        {
+            var model = await _productRepository.CreateUpdateProduct(productDto);
+            _response.Result = model;
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessages
+                = new List<string> {ex.ToString()};
+        }
+
+        return _response;
+    }
+
+    [HttpDelete]
+    public async Task<object> Delete(int id)
+    {
+        try
+        {
+            var isSuccess = await _productRepository.DeleteProduct(id);
+            _response.Result = isSuccess;
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessages
+                = new List<string> {ex.ToString()};
+        }
+
+        return _response;
     }
 }
