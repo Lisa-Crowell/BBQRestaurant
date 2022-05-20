@@ -46,6 +46,44 @@ namespace BBQ.Services.ProductAPI.Migrations
                     b.HasKey("ProductId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            CategoryName = "Appetizer",
+                            Description = "Your choice of 100% Angus beef or chicken sliders with homemade barbeque sauce on a Hawaiian sweetbread bun.<br/>Choose from Sweet and Tangy, Hot and Spicy, or Honey BBQ sauces with your choice of toppings.",
+                            ImageUrl = "",
+                            Name = "BBQ Sliders",
+                            Price = 13.99
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            CategoryName = "Appetizer",
+                            Description = "What BBQ is complete without a side of Southern Sweet Potato Fries? <br/>Hand breaded and fried to perfection. Choose from Tangy Ranch, Dill BBQ sauce, or Honey Mustard to dip them in. Your mouth will thank you!",
+                            ImageUrl = "",
+                            Name = "Sweet Potato Fries",
+                            Price = 9.9900000000000002
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            CategoryName = "Dessert",
+                            Description = "A flaky crust just like Mama used to make. Enjoy a slice this handed down family recipe, <br/>from our family to ours.",
+                            ImageUrl = "",
+                            Name = "Apple Pie",
+                            Price = 10.99
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            CategoryName = "Entree",
+                            Description = "Cooked to perfection this beef brisket has been smoking for hours waiting to be enjoyed! <br/>Smoked over hickory and maple chips for a flavor that cannot be beat!",
+                            ImageUrl = "",
+                            Name = "Beef Brisket",
+                            Price = 15.99
+                        });
                 });
 #pragma warning restore 612, 618
         }
