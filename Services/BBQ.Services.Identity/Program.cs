@@ -1,5 +1,6 @@
 using BBQ.Services.Identity;
 using BBQ.Services.Identity.DbContexts;
+using BBQ.Services.Identity.Initializer;
 using BBQ.Services.Identity.Models;
 using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
@@ -31,10 +32,10 @@ builder.Services.AddIdentityServer(options =>
 }).AddInMemoryIdentityResources(SD.IdentityResources)
     .AddInMemoryApiScopes(SD.ApiScopes)
     .AddInMemoryClients(SD.Clients)
-    .AddAspNetIdentity<ApplicationUser>();
+    .AddAspNetIdentity<ApplicationUser>()
+    .AddDeveloperSigningCredential();
 
-// add developer credentials for use while in development
-// builder.AddDeveloperSigningCredential();
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 
 var app = builder.Build();
 
@@ -59,5 +60,14 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+void SeedDatabase()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+        dbInitializer.Initialize();
+    }
+}
 
 app.Run();
