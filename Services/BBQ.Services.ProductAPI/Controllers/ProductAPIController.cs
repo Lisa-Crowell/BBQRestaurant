@@ -7,18 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace BBQ.Services.ProductAPI.Controllers;
 
 [Route("api/products")]
-public class ProductAPIController : ControllerBase
+public class ProductApiController : ControllerBase
 {
-    private readonly IProductRepository _productRepository;
     protected ResponseDto _response;
-
-    public ProductAPIController(IProductRepository productRepository)
+    private readonly IProductRepository _productRepository;
+    
+    public ProductApiController(IProductRepository productRepository)
     {
         _productRepository = productRepository;
         _response = new ResponseDto();
     }
-
+    
     [HttpGet]
+    [Authorize]
     public async Task<object> Get()
     {
         try
@@ -37,6 +38,7 @@ public class ProductAPIController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     [Route("{id}")]
     public async Task<object> Get(int id)
     {
