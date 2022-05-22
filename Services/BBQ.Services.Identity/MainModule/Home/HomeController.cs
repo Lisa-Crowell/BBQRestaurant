@@ -46,7 +46,7 @@ namespace IdentityServerHost.Quickstart.UI
         {
             var vm = new ErrorViewModel();
 
-            // retrieve error details from identityserver
+            // retrieve error details from identityServer
             var message = await _interaction.GetErrorContextAsync(errorId);
             if (message != null)
             {
