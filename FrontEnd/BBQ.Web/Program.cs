@@ -28,7 +28,7 @@ builder.Services.AddAuthentication(options =>
         options.ClaimActions.MapJsonKey("sub","sub","sub");
         options.TokenValidationParameters.NameClaimType = "name";
         options.TokenValidationParameters.RoleClaimType = "role";
-        options.Scope.Add("bbq");
+        options.Scope.Add("bbq"); // to app settings too
         options.SaveTokens = true;
     });
 
