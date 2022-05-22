@@ -19,7 +19,7 @@ public class ProductApiController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize]
+    // [Authorize]
     public async Task<object> Get()
     {
         try
