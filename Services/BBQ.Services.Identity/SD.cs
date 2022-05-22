@@ -32,7 +32,6 @@ public static class SD
             new()
             {
                 ClientId = "client",
-                // ClientSecrets = {new Secret("secret".Sha256())},
                 ClientSecrets = {new Secret(Environment.GetEnvironmentVariable("CLIENT_SECRETS").Sha256())},
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 AllowedScopes = {"read", "write", "profile"}
@@ -41,11 +40,8 @@ public static class SD
             new()
             {
                 ClientId = "bbq",
-                // ClientSecrets = {new Secret("secret".Sha256())},
                 ClientSecrets = {new Secret(Environment.GetEnvironmentVariable("CLIENT_SECRETS").Sha256())},
                 AllowedGrantTypes = GrantTypes.Code,
-                //RedirectUris = {"https://localhost:7040/signin-oidc"},
-                // PostLogoutRedirectUris = {"https://localhost:7040/signout-callback-oidc"},
                 RedirectUris = {Environment.GetEnvironmentVariable("REDIRECT_URIS")},
                 PostLogoutRedirectUris = {Environment.GetEnvironmentVariable("POST_LOGOUT_REDIRECT_URIS")},
                 AllowedScopes = new List<string>
