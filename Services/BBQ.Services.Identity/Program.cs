@@ -3,6 +3,7 @@ using BBQ.Services.Identity.DbContexts;
 using BBQ.Services.Identity.Initializer;
 using BBQ.Services.Identity.Models;
 using Duende.IdentityServer.Models;
+using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,7 +34,8 @@ builder.Services.AddIdentityServer(options =>
     .AddInMemoryApiScopes(SD.ApiScopes)
     .AddInMemoryClients(SD.Clients)
     .AddAspNetIdentity<ApplicationUser>()
-    .AddDeveloperSigningCredential();
+    .AddDeveloperSigningCredential()
+    .AddTestUsers(TestUsers.Users);
 
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 
@@ -43,12 +45,14 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -57,9 +61,12 @@ app.UseIdentityServer();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
+SeedDatabase();
+/*app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");*/
+app.MapRazorPages();
+app.Run();
 
 void SeedDatabase()
 {
@@ -70,4 +77,3 @@ void SeedDatabase()
     }
 }
 
-app.Run();
