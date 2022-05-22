@@ -3,7 +3,6 @@ using BBQ.Services.Identity.DbContexts;
 using BBQ.Services.Identity.Initializer;
 using BBQ.Services.Identity.Models;
 using BBQ.Services.Identity.Services;
-using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +12,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 
 
 // get the connection string
@@ -26,13 +24,13 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 
 // build server
 builder.Services.AddIdentityServer(options =>
-{
-    options.Events.RaiseErrorEvents = true;
-    options.Events.RaiseInformationEvents = true;
-    options.Events.RaiseFailureEvents = true;
-    options.Events.RaiseSuccessEvents = true;
-    options.EmitStaticAudienceClaim = true;
-}).AddInMemoryIdentityResources(SD.IdentityResources)
+    {
+        options.Events.RaiseErrorEvents = true;
+        options.Events.RaiseInformationEvents = true;
+        options.Events.RaiseFailureEvents = true;
+        options.Events.RaiseSuccessEvents = true;
+        options.EmitStaticAudienceClaim = true;
+    }).AddInMemoryIdentityResources(SD.IdentityResources)
     .AddInMemoryApiScopes(SD.ApiScopes)
     .AddInMemoryClients(SD.Clients)
     .AddAspNetIdentity<ApplicationUser>()
@@ -65,8 +63,8 @@ app.UseIdentityServer();
 app.UseAuthorization();
 SeedDatabase();
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    "default",
+    "{controller=Home}/{action=Index}/{id?}");
 
 void SeedDatabase()
 {
