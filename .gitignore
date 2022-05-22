@@ -380,3 +380,5 @@ __pycache__/
 *.xsd.cs
 
 *.jwk
+
+*is-singing-key
