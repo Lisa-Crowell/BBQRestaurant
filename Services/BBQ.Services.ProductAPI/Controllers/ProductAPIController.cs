@@ -9,15 +9,15 @@ namespace BBQ.Services.ProductAPI.Controllers;
 [Route("api/products")]
 public class ProductApiController : ControllerBase
 {
-    protected ResponseDto _response;
     private readonly IProductRepository _productRepository;
-    
+    protected ResponseDto _response;
+
     public ProductApiController(IProductRepository productRepository)
     {
         _productRepository = productRepository;
         _response = new ResponseDto();
     }
-    
+
     [HttpGet]
     [Authorize]
     public async Task<object> Get()
