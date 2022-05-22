@@ -43,8 +43,8 @@ public static class SD
                 ClientSecrets= { new Secret("secret".Sha256())},
                 // ClientSecrets = Environment.GetEnvironmentVariable("CLIENT_SECRETS"),
                 AllowedGrantTypes = GrantTypes.Code,
-                RedirectUris={ "https://localhost:44378/signin-oidc" },
-                PostLogoutRedirectUris={"https://localhost:44378/signout-callback-oidc" },
+                RedirectUris={ "https://localhost:7040/signin-oidc" },
+                PostLogoutRedirectUris={"https://localhost:7040/signout-callback-oidc" },
                 // RedirectUris = Environment.GetEnvironmentVariable("REDIRECT_URIS"),
                 // PostLogoutRedirectUris = Environment.GetEnvironmentVariable("POST_LOGOUT_REDIRECT_URIS"),
                 AllowedScopes = new List<string>
