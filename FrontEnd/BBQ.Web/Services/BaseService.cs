@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net.Http.Headers;
+using System.Text;
 using BBQ.Web.Models;
 using BBQ.Web.Services.IServices;
 using Newtonsoft.Json;
@@ -7,27 +8,35 @@ namespace BBQ.Web.Services;
 
 public class BaseService : IBaseService
 {
+    public ResponseDto responseModel { get; set; }
+    public IHttpClientFactory httpClient { get; set; }
+    
     public BaseService(IHttpClientFactory httpClient)
     {
         responseModel = new ResponseDto();
         this.httpClient = httpClient;
     }
-
-    public IHttpClientFactory httpClient { get; set; }
-    public ResponseDto responseModel { get; set; }
-
+    
     public async Task<T> SendAsync<T>(ApiRequest apiRequest)
     {
         try
         {
             var client = httpClient.CreateClient("BBQAPI");
-            var message = new HttpRequestMessage();
+            HttpRequestMessage message = new HttpRequestMessage();
             message.Headers.Add("Accept", "application/json");
             message.RequestUri = new Uri(apiRequest.Url);
             client.DefaultRequestHeaders.Clear();
             if (apiRequest.Data != null)
+            {
                 message.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data), Encoding.UTF8,
                     "application/json");
+            }
+
+            if (!string.IsNullOrEmpty(apiRequest.AccessToken))
+            {
+                client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Bearer", apiRequest.AccessToken);
+            }
 
             HttpResponseMessage apiResponse = null;
             switch (apiRequest.ApiType)
@@ -47,6 +56,7 @@ public class BaseService : IBaseService
             }
 
             apiResponse = await client.SendAsync(message);
+            
             var apiContent = await apiResponse.Content.ReadAsStringAsync();
             var apiResponseDto = JsonConvert.DeserializeObject<T>(apiContent);
             return apiResponseDto;
