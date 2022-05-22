@@ -1,6 +1,7 @@
 ﻿using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 
+
 namespace BBQ.Services.Identity;
 
 public static class SD
@@ -31,22 +32,22 @@ public static class SD
             new()
             {
                 ClientId = "client",
-                ClientSecrets= { new Secret("secret".Sha256())},
-                // ClientSecrets = Environment.GetEnvironmentVariable("CLIENT_SECRETS"),
+                // ClientSecrets = {new Secret("secret".Sha256())},
+                ClientSecrets = {new Secret(Environment.GetEnvironmentVariable("CLIENT_SECRETS").Sha256())},
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 AllowedScopes = {"read", "write", "profile"}
             },
-         
+
             new()
             {
                 ClientId = "bbq",
-                ClientSecrets= { new Secret("secret".Sha256())},
-                // ClientSecrets = Environment.GetEnvironmentVariable("CLIENT_SECRETS"),
+                // ClientSecrets = {new Secret("secret".Sha256())},
+                ClientSecrets = {new Secret(Environment.GetEnvironmentVariable("CLIENT_SECRETS").Sha256())},
                 AllowedGrantTypes = GrantTypes.Code,
-                RedirectUris={ "https://localhost:7040/signin-oidc" },
-                PostLogoutRedirectUris={"https://localhost:7040/signout-callback-oidc" },
-                // RedirectUris = Environment.GetEnvironmentVariable("REDIRECT_URIS"),
-                // PostLogoutRedirectUris = Environment.GetEnvironmentVariable("POST_LOGOUT_REDIRECT_URIS"),
+                //RedirectUris = {"https://localhost:7040/signin-oidc"},
+                // PostLogoutRedirectUris = {"https://localhost:7040/signout-callback-oidc"},
+                RedirectUris = {Environment.GetEnvironmentVariable("REDIRECT_URIS")},
+                PostLogoutRedirectUris = {Environment.GetEnvironmentVariable("POST_LOGOUT_REDIRECT_URIS")},
                 AllowedScopes = new List<string>
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
