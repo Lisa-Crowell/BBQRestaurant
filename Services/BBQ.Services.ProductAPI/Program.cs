@@ -10,6 +10,37 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
+
+// get the connection string
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+// add mapping configurations
+var mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddControllers();
+
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.Authority = "https://localhost:44365/"; //get this to configure file
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = false
+        };
+    });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ApiScope", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("scope", "bbq");
+    });
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -43,35 +74,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// get the connection string
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-
-// add mapping configurations
-var mapper = MappingConfig.RegisterMaps().CreateMapper();
-builder.Services.AddSingleton(mapper);
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddControllers();
-
-builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer("Bearer", options =>
-    {
-        options.Authority = "https://localhost:44365/"; //get this to configure file
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateAudience = false
-        };
-    });
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("ApiScope", policy =>
-    {
-        policy.RequireAuthenticatedUser();
-        policy.RequireClaim("scope", "bbq");
-    });
-});
 
 var app = builder.Build();
 
@@ -84,7 +86,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
