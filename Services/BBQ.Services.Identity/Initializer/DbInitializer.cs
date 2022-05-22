@@ -34,12 +34,12 @@ public class DbInitializer : IDbInitializer
 
         var adminUser = new ApplicationUser
         {
-            UserName = "admin1@gmail.com",
-            Email = "admin1@gmail.com",
+            UserName = Environment.GetEnvironmentVariable("ADMIN_USERNAME"),
+            Email = Environment.GetEnvironmentVariable("ADMIN_EMAIL"),
             EmailConfirmed = true,
-            PhoneNumber = "111111111111",
-            FirstName = "Ben",
-            LastName = "Admin"
+            PhoneNumber = Environment.GetEnvironmentVariable("ADMIN_PHONE"),
+            FirstName = Environment.GetEnvironmentVariable("ADMIN_FIRSTNAME"),
+            LastName = Environment.GetEnvironmentVariable("ADMIN_LASTNAME")
         };
 
         _userManager.CreateAsync(adminUser, "Admin123*").GetAwaiter().GetResult();
@@ -55,12 +55,12 @@ public class DbInitializer : IDbInitializer
 
         var customerUser = new ApplicationUser
         {
-            UserName = "customer1@gmail.com",
-            Email = "customer1@gmail.com",
+            UserName = Environment.GetEnvironmentVariable("CUST_USERNAME"),
+            Email = Environment.GetEnvironmentVariable("CUST_EMAIL"),
             EmailConfirmed = true,
-            PhoneNumber = "111111111111",
-            FirstName = "Ben",
-            LastName = "Cust"
+            PhoneNumber = Environment.GetEnvironmentVariable("CUST_PHONE"),
+            FirstName = Environment.GetEnvironmentVariable("CUST_FIRSTNAME"),
+            LastName = Environment.GetEnvironmentVariable("CUST_LASTNAME")
         };
 
         _userManager.CreateAsync(customerUser, "Admin123*").GetAwaiter().GetResult();
