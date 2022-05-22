@@ -2,7 +2,9 @@ using BBQ.Services.Identity;
 using BBQ.Services.Identity.DbContexts;
 using BBQ.Services.Identity.Initializer;
 using BBQ.Services.Identity.Models;
+using BBQ.Services.Identity.Services;
 using Duende.IdentityServer.Models;
+using Duende.IdentityServer.Services;
 using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -37,7 +39,8 @@ builder.Services.AddIdentityServer(options =>
     .AddDeveloperSigningCredential()
     .AddTestUsers(TestUsers.Users);
 
-builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+builder.Services.AddScoped<IDbInitializer, DbInitializer>()
+    .AddScoped<IProfileService, ProfileService>();
 
 var app = builder.Build();
 
