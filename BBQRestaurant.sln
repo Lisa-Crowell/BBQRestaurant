@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.ProductAPI", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.Identity", "Services\BBQ.Services.Identity\BBQ.Services.Identity.csproj", "{9C62B800-AA08-47B9-9203-E8649C3C71D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCartAPI", "Services\ShoppingCartAPI\ShoppingCartAPI.csproj", "{C3B9AEF1-A8BA-4255-B580-671D15148DAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{9C62B800-AA08-47B9-9203-E8649C3C71D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C62B800-AA08-47B9-9203-E8649C3C71D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C62B800-AA08-47B9-9203-E8649C3C71D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3B9AEF1-A8BA-4255-B580-671D15148DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3B9AEF1-A8BA-4255-B580-671D15148DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3B9AEF1-A8BA-4255-B580-671D15148DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3B9AEF1-A8BA-4255-B580-671D15148DAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
