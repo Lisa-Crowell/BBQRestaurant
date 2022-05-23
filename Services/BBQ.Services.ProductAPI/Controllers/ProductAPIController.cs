@@ -19,7 +19,7 @@ public class ProductApiController : ControllerBase
     }
 
     [HttpGet]
-    // [Authorize]
+    // [Authorize] Remove so product can be seen without logging in
     public async Task<object> Get()
     {
         try
@@ -38,7 +38,7 @@ public class ProductApiController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize]
+    // [Authorize] Remove so product can be seen without logging in
     [Route("{id}")]
     public async Task<object> Get(int id)
     {
