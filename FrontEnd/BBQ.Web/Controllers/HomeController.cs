@@ -53,4 +53,9 @@ public class HomeController : Controller
     {
         return SignOut("Cookies", "oidc");
     }
+
+    public IActionResult Details()
+    {
+        throw new NotImplementedException();
+    }
 }
