@@ -6,9 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.ProductAPI", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.Identity", "Services\BBQ.Services.Identity\BBQ.Services.Identity.csproj", "{9C62B800-AA08-47B9-9203-E8649C3C71D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.ShoppingCartAPI", "Services\BBQ.Services.ShoppingCartAPI\BBQ.Services.ShoppingCartAPI.csproj", "{C3B9AEF1-A8BA-4255-B580-671D15148DAC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.ShoppingCart", "Services\BBQ.Services.ShoppingCart\BBQ.Services.ShoppingCart.csproj", "{AE554B76-B991-4C2D-B161-4C07B75ECA9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.ShoppingCartAPI", "Services\BBQ.Services.ShoppingCartAPI\BBQ.Services.ShoppingCartAPI.csproj", "{AE554B76-B991-4C2D-B161-4C07B75ECA9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
