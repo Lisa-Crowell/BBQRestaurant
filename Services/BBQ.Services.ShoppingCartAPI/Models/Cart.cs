@@ -1,5 +1,4 @@
-﻿
-using BBQ.Services.ShoppingCartAPI.Models;
+﻿using BBQ.Services.ShoppingCartAPI.Models;
 
 namespace ShoppingCartAPI.Models;
 
