@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using BBQ.Services.ShoppingCartAPI.Models;
 
 namespace ShoppingCartAPI.Models;
 

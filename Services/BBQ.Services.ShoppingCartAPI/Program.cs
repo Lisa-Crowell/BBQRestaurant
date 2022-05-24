@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using BBQ.Services.ShoppingCartAPI.DbContexts;
 using BBQ.Services.ShoppingCartAPI;
+using ShoppingCartAPI.DbContexts;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,7 +44,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo {Title = "BBQ.Services.ShoppingCartAPI", Version = "v1"});
+    c.SwaggerDoc("v1", new OpenApiInfo {Title = "BBQ.Services.BBQ.Services.ShoppingCartAPI", Version = "v1"});
     c.EnableAnnotations();
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {

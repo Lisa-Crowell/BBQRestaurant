@@ -1,7 +1,7 @@
-﻿using BBQ.Services.ShoppingCartAPI.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace BBQ.Services.ShoppingCartAPI.DbContexts;
+
+namespace ShoppingCartAPI.DbContexts;
 
 public class ApplicationDbContext : DbContext
 {
