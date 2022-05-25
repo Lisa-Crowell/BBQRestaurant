@@ -1,9 +1,7 @@
-﻿@Model BBQ.Web.Models.CartDto
+﻿@model BBQ.Web.Models.CartDto
 @if (Model.CartHeader != null && Model.CartDetails.Count() > 0)
 {
-
-
-<form method="post">
+    <form method="post">
     <br />
     <input asp-for="CartHeader.UserId" hidden>
     <input asp-for="CartHeader.CartHeaderId" hidden>
