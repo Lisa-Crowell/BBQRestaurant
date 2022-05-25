@@ -7,12 +7,12 @@ namespace BBQ.Services.CouponAPI.Controllers;
 
 [ApiController]
 [Route("api/coupon")]
-public class CouponAPIController : Controller
+public class CouponController : Controller
 {
     private readonly ICouponRepository _couponRepository;
     protected ResponseDto _response;
 
-    public CouponAPIController(ICouponRepository couponRepository)
+    public CouponController(ICouponRepository couponRepository)
     {
         _couponRepository = couponRepository;
         this._response = new ResponseDto();
