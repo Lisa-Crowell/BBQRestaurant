@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BBQ.Services.CouponAPI.DbContexts;
 using BBQ.Services.CouponAPI.Models.Dto;
+using Microsoft.EntityFrameworkCore;
 
 namespace BBQ.Services.CouponAPI.Repository;
 
@@ -13,8 +14,9 @@ public class CouponRepository : ICouponRepository
         _db = db;
         _mapper = mapper;
     }
-    public Task<CouponDto> GetCouponByCode(string couponCode)
+    public async Task<CouponDto> GetCouponByCode(string couponCode)
     {
-        throw new NotImplementedException();
+        var couponFromDb = await _db.Coupons.FirstOrDefaultAsync(u => u.CouponCode == couponCode);
+        return _mapper.Map<CouponDto>(couponFromDb);
     }
 }
