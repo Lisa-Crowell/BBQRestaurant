@@ -62,9 +62,9 @@ app.UseIdentityServer();
 
 app.UseAuthorization();
 SeedDatabase();
-app.MapControllerRoute(
-    "default",
-    "{controller=Home}/{action=Index}/{id?}");
+// app.MapControllerRoute(
+//     "default",
+//     "{controller=Home}/{action=Index}/{id?}");
 
 void SeedDatabase()
 {

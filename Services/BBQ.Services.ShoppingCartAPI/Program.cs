@@ -23,6 +23,7 @@ builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddControllers();
+
 var authority = Environment.GetEnvironmentVariable("IDENTITY_SERVER_URL"); //get this to configure file
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
@@ -46,7 +47,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo {Title = "BBQ.Services.BBQ.Services.ShoppingCartAPI", Version = "v1"});
+    c.SwaggerDoc("v1", new OpenApiInfo {Title = "BBQ.Services.ShoppingCartAPI"});
     c.EnableAnnotations();
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
