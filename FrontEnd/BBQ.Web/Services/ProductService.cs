@@ -25,6 +25,8 @@ public class ProductService : BaseService, IProductService
 
     public async Task<T> DeleteProductAsync<T>(int id, string accessToken)
     {
+
+        Console.WriteLine("Delete product async called");
         return await SendAsync<T>(new ApiRequest
         {
             ApiType = SD.ApiType.DELETE,

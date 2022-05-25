@@ -37,7 +37,7 @@ public class ProductRepository : IProductRepository
             if (product == null) return false;
 
             _db.Products.Remove(product);
-            await _db.SaveChangesAsync();
+            _db.SaveChanges();
             return true;
         }
         catch (Exception e)

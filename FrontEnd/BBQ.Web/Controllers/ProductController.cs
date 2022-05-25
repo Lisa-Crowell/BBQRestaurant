@@ -72,17 +72,16 @@ public class ProductController : Controller
         return View(model);
     }
 
-    [Authorize(Roles = "Admin")]
+    // [Authorize(Roles = "Admin")]
     public async Task<IActionResult> ProductDelete(int productId)
     {
         var accessToken = await HttpContext.GetTokenAsync("access_token");
-        var response = await _productService.GetProductByIdAsync<ResponseDto>(productId, accessToken);
-        if (response != null && response.IsSuccess)
+        var response = await _productService.DeleteProductAsync<ResponseDto>(productId, accessToken);
+        if (response.IsSuccess)
         {
-            var model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
-            return View(model);
+            return RedirectToAction(nameof(ProductIndex));
         }
-
+        
         return NotFound();
     }
 
