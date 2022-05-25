@@ -1,4 +1,5 @@
-﻿@model BBQ.Web.Models.CartDto
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model BBQ.Web.Models.CartDto
 @if (Model.CartHeader != null && Model.CartDetails.Count() > 0)
 {
     <form method="post">
