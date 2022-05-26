@@ -1,6 +1,5 @@
 ﻿using BBQ.Services.ShoppingCartAPI.Models.Dto;
-
-namespace BBQ.Services.ShoppingCart.Repository;
+namespace BBQ.Services.ShoppingCartAPI.Repository;
 
 public interface ICartRepository
 {

@@ -1,5 +1,4 @@
-﻿using BBQ.Services.ShoppingCart.Models;
-using BBQ.Services.ShoppingCartAPI.Models;
+﻿using BBQ.Services.ShoppingCartAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 

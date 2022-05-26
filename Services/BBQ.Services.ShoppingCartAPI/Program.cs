@@ -1,5 +1,5 @@
-using BBQ.Services.ShoppingCart;
-using BBQ.Services.ShoppingCart.Repository;
+using BBQ.Services.ShoppingCartAPI;
+using BBQ.Services.ShoppingCartAPI.Repository;
 using BBQ.Services.ShoppingCartAPI.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

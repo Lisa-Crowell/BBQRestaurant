@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BBQ.Services.ShoppingCart.Models;
+namespace BBQ.Services.ShoppingCartAPI.Models;
 
 public class CartHeader
 {

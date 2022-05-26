@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using BBQ.Services.ShoppingCart.Models;
+using BBQ.Services.ShoppingCartAPI.Models;
 
-namespace BBQ.Services.ShoppingCart.Controllers;
+namespace BBQ.Services.ShoppingCartAPI.Controllers;
 
 public class HomeController : Controller
 {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BBQ.Services.ShoppingCart.Models;
+namespace BBQ.Services.ShoppingCartAPI.Models;
 
 public class Product
 {

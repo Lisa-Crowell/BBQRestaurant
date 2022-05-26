@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using BBQ.Services.ShoppingCart.Models;
+using BBQ.Services.ShoppingCartAPI.Models;
 using BBQ.Services.ShoppingCartAPI.DbContexts;
 using BBQ.Services.ShoppingCartAPI.Models.Dto;
 using Microsoft.EntityFrameworkCore;
 
-namespace BBQ.Services.ShoppingCart.Repository;
+namespace BBQ.Services.ShoppingCartAPI.Repository;
 
 public class CartRepository : ICartRepository
 {

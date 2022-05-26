@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using BBQ.Services.ShoppingCart.Models;
+using BBQ.Services.ShoppingCartAPI.Models;
 using BBQ.Services.ShoppingCartAPI.Models.Dto;
 
-namespace BBQ.Services.ShoppingCart;
+namespace BBQ.Services.ShoppingCartAPI;
 
 public class MappingConfig
 {
