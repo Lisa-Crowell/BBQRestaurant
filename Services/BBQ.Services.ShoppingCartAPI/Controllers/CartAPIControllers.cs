@@ -1,4 +1,4 @@
-﻿using BBQ.Services.ShoppingCart.Repository;
+﻿using BBQ.Services.ShoppingCartAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
 using BBQ.Services.ShoppingCartAPI.Models.Dto;
 using ShoppingCartAPI.Models.Dto;
@@ -23,8 +23,8 @@ public class CartAPIController : Controller
     {
         try
         {
-            var cartDto = await _cartRepository.GetCartByUserId(userId);
-            _response.Result = cartDto;
+            var cart = await _cartRepository.GetCartByUserId(userId);
+            _response.Result = cart;
         }
         catch (Exception ex)
         {

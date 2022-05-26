@@ -17,25 +17,26 @@ public class CartRepository : ICartRepository
         _mapper = mapper;
     }
     
-    public async Task<CartDto> GetCartByUserId(string userId)
+    public async Task<Cart> GetCartByUserId(string userId)
     {
         Cart cart = new()
         {
             CartHeader = await _db.CartHeaders.FirstOrDefaultAsync(u =>
-                u.UserId == userId)
+                u != null && u.UserId == userId)
         };
         cart.CartDetails = _db.CartDetails.Where(u => 
-            u.CartHeaderId == cart.CartHeader.CartHeaderId).Include(u=>u.Product);
+            cart.CartHeader != null && u.CartHeaderId == cart.CartHeader.CartHeaderId).Include(u=>u.Product);
 
-        return _mapper.Map<CartDto>(cart);
+        // return _mapper.Map<Cart>(cart);
+        return cart;
     }
 
-    public async Task<CartDto> CreateUpdateCart(CartDto cartDto)
+    public async Task<Cart> CreateUpdateCart(CartDto cartDto)
     {
         Cart cart = _mapper.Map<Cart>(cartDto);
         // check if product exists in database, if not then create it
         var prodInDb = await _db.Products.FirstOrDefaultAsync(u => 
-            u.ProductId == cartDto.CartDetails.FirstOrDefault().ProductId);
+            u.ProductId == cartDto.CartDetails.FirstOrDefault()!.ProductId);
         if (prodInDb == null)
         {
             _db.Products.Add(cart.CartDetails.FirstOrDefault().Product);
@@ -79,7 +80,7 @@ public class CartRepository : ICartRepository
              }
         }
 
-        return _mapper.Map<CartDto>(cartDto);
+        return _mapper.Map<Cart>(cartDto);
     }
 
     public async Task<bool> RemoveFromCart(int cartDetailsId)

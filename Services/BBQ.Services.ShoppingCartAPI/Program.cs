@@ -87,7 +87,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-// app.UseRouting(); not sure if this is needed or not yet
+app.UseRouting(); 
 app.UseAuthentication();
 app.UseAuthorization();
 
