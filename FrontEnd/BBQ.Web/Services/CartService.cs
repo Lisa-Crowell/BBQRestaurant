@@ -52,4 +52,26 @@ public class CartService : BaseService, ICartService
             AccessToken = accessToken
         });
     }
+
+    public async Task<T> ApplyCoupon<T>(CartDto cartDto, string accessToken = null)
+    {
+        return await this.SendAsync<T>(new ApiRequest()
+        {
+            ApiType = SD.ApiType.POST,
+            Data = cartDto,
+            Url = SD.ShoppingCartAPIBase + "/api/cart/ApplyCoupon",
+            AccessToken = accessToken
+        });
+    }
+
+    public async Task<T> RemoveCoupon<T>(string userId, string accessToken = null)
+    {
+        return await this.SendAsync<T>(new ApiRequest()
+        {
+            ApiType = SD.ApiType.POST,
+            Data = userId,
+            Url = SD.ShoppingCartAPIBase + "/api/cart/RemoveCoupon",
+            AccessToken = accessToken
+        });
+    }
 }
