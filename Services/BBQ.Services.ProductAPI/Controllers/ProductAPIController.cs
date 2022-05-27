@@ -15,7 +15,7 @@ public class ProductApiController : ControllerBase
     public ProductApiController(IProductRepository productRepository)
     {
         _productRepository = productRepository;
-        _response = new ResponseDto();
+        this._response = new ResponseDto();
     }
 
     [HttpGet]
@@ -31,7 +31,7 @@ public class ProductApiController : ControllerBase
         {
             _response.IsSuccess = false;
             _response.ErrorMessages
-                = new List<string> {ex.ToString()};
+                = new List<string>() {ex.ToString()};
         }
 
         return _response;
@@ -51,7 +51,7 @@ public class ProductApiController : ControllerBase
         {
             _response.IsSuccess = false;
             _response.ErrorMessages
-                = new List<string> {ex.ToString()};
+                = new List<string>() {ex.ToString()};
         }
 
         return _response;
@@ -70,7 +70,7 @@ public class ProductApiController : ControllerBase
         {
             _response.IsSuccess = false;
             _response.ErrorMessages
-                = new List<string> {ex.ToString()};
+                = new List<string>() {ex.ToString()};
         }
 
         return _response;
@@ -89,7 +89,7 @@ public class ProductApiController : ControllerBase
         {
             _response.IsSuccess = false;
             _response.ErrorMessages
-                = new List<string> {ex.ToString()};
+                = new List<string>() {ex.ToString()};
         }
 
         return _response;
@@ -102,14 +102,14 @@ public class ProductApiController : ControllerBase
     {
         try
         {
-            var isSuccess = await _productRepository.DeleteProduct(id);
+            bool isSuccess = await _productRepository.DeleteProduct(id);
             _response.Result = isSuccess;
         }
         catch (Exception ex)
         {
             _response.IsSuccess = false;
             _response.ErrorMessages
-                = new List<string> {ex.ToString()};
+                = new List<string>() {ex.ToString()};
         }
 
         return _response;
