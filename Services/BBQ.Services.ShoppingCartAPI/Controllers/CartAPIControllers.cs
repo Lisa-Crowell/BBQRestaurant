@@ -1,7 +1,6 @@
-﻿using BBQ.Services.ShoppingCartAPI.Repository;
+﻿using BBQ.Services.ShoppingCartAPI.Models.Dto;
+using BBQ.Services.ShoppingCartAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
-using BBQ.Services.ShoppingCartAPI.Models.Dto;
-using ShoppingCartAPI.Models.Dto;
 
 namespace BBQ.Services.ShoppingCartAPI.Controllers;
 
@@ -10,11 +9,14 @@ namespace BBQ.Services.ShoppingCartAPI.Controllers;
 public class CartAPIController : Controller
 {
     private readonly ICartRepository _cartRepository;
+
+    // private readonly ICouponRepository _couponRepository;
     protected ResponseDto _response;
 
     public CartAPIController(ICartRepository cartRepository)
     {
         _cartRepository = cartRepository;
+
         _response = new ResponseDto();
     }
 
@@ -23,8 +25,8 @@ public class CartAPIController : Controller
     {
         try
         {
-            var cart = await _cartRepository.GetCartByUserId(userId);
-            _response.Result = cart;
+            var cartDto = await _cartRepository.GetCartByUserId(userId);
+            _response.Result = cartDto;
         }
         catch (Exception ex)
         {
@@ -85,6 +87,7 @@ public class CartAPIController : Controller
 
         return _response;
     }
+
     [HttpPost("ApplyCoupon")]
     public async Task<object> ApplyCoupon([FromBody] CartDto cartDto)
     {
@@ -102,12 +105,13 @@ public class CartAPIController : Controller
 
         return _response;
     }
+
     [HttpPost("RemoveCoupon")]
     public async Task<object> RemoveCoupon([FromBody] string userId)
     {
         try
         {
-            bool isSuccess = await _cartRepository.RemoveCoupon(userId);
+            var isSuccess = await _cartRepository.RemoveCoupon(userId);
             _response.Result = isSuccess;
         }
         catch (Exception ex)
