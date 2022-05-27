@@ -1,3 +1,4 @@
+using AutoMapper;
 using BBQ.Services.CouponAPI;
 using BBQ.Services.CouponAPI.Repository;
 using BBQ.Services.CouponAPI.DbContexts;
@@ -17,7 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // add mapping configurations
-var mapper = MappingConfig.RegisterMaps().CreateMapper();
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ICouponRepository, CouponRepository>();
