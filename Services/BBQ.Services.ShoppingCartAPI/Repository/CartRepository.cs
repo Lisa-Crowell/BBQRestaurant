@@ -130,10 +130,11 @@ public class CartRepository : ICartRepository
             var cartDetails = await _db.CartDetails
                 .FirstOrDefaultAsync(u => u.CartDetailsId == cartDetailsId);
 
-            var totalCountOfCartItems = _db.CartDetails.Count(u => u.CartHeaderId == cartDetails.CartHeaderId);
+            var totalCountOfCartItems = _db.CartDetails
+                .Where(u => u.CartHeaderId == cartDetails.CartHeaderId).Count();
 
             _db.CartDetails.Remove(cartDetails);
-            if (totalCountOfCartItems == 1) // last product in cart
+            if (totalCountOfCartItems == 1)
             {
                 var cartHeaderToRemove = await _db.CartHeaders
                     .FirstOrDefaultAsync(u => u.CartHeaderId == cartDetails.CartHeaderId);

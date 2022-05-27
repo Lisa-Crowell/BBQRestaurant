@@ -22,13 +22,16 @@ public class ProductController : Controller
         var accessToken = await HttpContext.GetTokenAsync("access_token");
         var response = await _productService.GetAllProductsAsync<ResponseDto>(accessToken);
         if (response != null && response.IsSuccess)
+        {
             list = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(response.Result));
+        }
+
         return View(list);
     }
 
-    public Task<IActionResult> ProductCreate()
+    public async Task<IActionResult> ProductCreate()
     {
-        return Task.FromResult<IActionResult>(View());
+        return View();
     }
 
     [HttpPost]
@@ -39,7 +42,8 @@ public class ProductController : Controller
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
             var response = await _productService.CreateProductAsync<ResponseDto>(model, accessToken);
-            if (response != null && response.IsSuccess) return RedirectToAction(nameof(ProductIndex));
+            if (response != null && response.IsSuccess) 
+            {return RedirectToAction(nameof(ProductIndex));}
         }
 
         return View(model);
@@ -66,20 +70,23 @@ public class ProductController : Controller
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
             var response = await _productService.UpdateProductAsync<ResponseDto>(model, accessToken);
-            if (response != null && response.IsSuccess) return RedirectToAction(nameof(ProductIndex));
+            if (response != null && response.IsSuccess) 
+            {return RedirectToAction(nameof(ProductIndex));}
         }
 
         return View(model);
     }
 
-    // [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> ProductDelete(int productId)
     {
         var accessToken = await HttpContext.GetTokenAsync("access_token");
-        var response = await _productService.DeleteProductAsync<ResponseDto>(productId, accessToken);
-        if (response.IsSuccess)
+        var response = await _productService.GetProductByIdAsync<ResponseDto>(productId, accessToken);
+        if (response != null && response.IsSuccess)
         {
             return RedirectToAction(nameof(ProductIndex));
+            // ProductDto model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
+            // return View(model);
         }
         
         return NotFound();
@@ -94,7 +101,7 @@ public class ProductController : Controller
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
             var response = await _productService.DeleteProductAsync<ResponseDto>(model.ProductId, accessToken);
-            if (response.IsSuccess) return RedirectToAction(nameof(ProductIndex));
+            if (response.IsSuccess)
             {
                 return RedirectToAction(nameof(ProductIndex));
             }

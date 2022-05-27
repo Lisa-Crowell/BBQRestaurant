@@ -25,7 +25,7 @@ public class CartAPIController : Controller
     {
         try
         {
-            object cartDto = await _cartRepository.GetCartByUserId(userId);
+            var cartDto = await _cartRepository.GetCartByUserId(userId);
             _response.Result = cartDto;
         }
         catch (Exception ex)

@@ -3,7 +3,7 @@
 
 <form>
     <div class="container row">
-        
+
         @foreach (var product in Model)
         {
             <div class="col-4 ">
@@ -16,10 +16,13 @@
                             <p class="card-text">@Html.Raw(product.Description)</p>
                             <div class="row">
                                 <div class="col pt-1">
-                                    <span style="font-size:23px;">@string.Format("{0:C}", product.Price)</span>
+                                    <span style="font-size:23px;">@string.Format("{0:c}", product.Price)</span>
                                 </div>
                                 <div class="col">
-                                    <a class="btn btn-success form-control" asp-action="Details" asp-route-productId="@product.ProductId">Details</a>
+                                    <a asp-action="Details" asp-route-productId="@product.ProductId"
+                                       class="btn btn-success form-control">
+                                        Details
+                                    </a>
                                 </div>
                             </div>
                         </div>

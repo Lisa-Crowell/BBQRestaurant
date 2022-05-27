@@ -102,7 +102,7 @@ public class ProductApiController : ControllerBase
     {
         try
         {
-            bool isSuccess = await _productRepository.DeleteProduct(id);
+            var isSuccess = await _productRepository.DeleteProduct(id);
             _response.Result = isSuccess;
         }
         catch (Exception ex)

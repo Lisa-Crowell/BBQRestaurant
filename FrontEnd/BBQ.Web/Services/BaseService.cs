@@ -13,7 +13,7 @@ public class BaseService : IBaseService
     
     public BaseService(IHttpClientFactory httpClient)
     {
-        responseModel = new ResponseDto();
+        this.responseModel = new ResponseDto();
         this.httpClient = httpClient;
     }
     
@@ -22,7 +22,7 @@ public class BaseService : IBaseService
         try
         {
             var client = httpClient.CreateClient("BBQAPI");
-            HttpRequestMessage message = new HttpRequestMessage();
+            var message = new HttpRequestMessage();
             message.Headers.Add("Accept", "application/json");
             message.RequestUri = new Uri(apiRequest.Url);
             client.DefaultRequestHeaders.Clear();
