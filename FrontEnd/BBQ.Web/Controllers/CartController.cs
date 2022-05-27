@@ -15,6 +15,7 @@ public class CartController : Controller
     public CartController(IProductService productService, ICartService cartService, ICouponService couponService)
     {
         _productService = productService;
+        _couponService = couponService;
         _cartService = cartService;
     }
 
@@ -82,12 +83,12 @@ public class CartController : Controller
 
         if (cartDto.CartHeader != null)
         {
-            if (string.IsNullOrEmpty(cartDto.CartHeader.CouponCode))
+            if (!string.IsNullOrEmpty(cartDto.CartHeader.CouponCode))
             {
                 var coupon = await _couponService.GetCoupon<ResponseDto>(cartDto.CartHeader.CouponCode, accessToken);
                 if (coupon != null && coupon.IsSuccess)
                 {
-                    var couponObj = JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(response.Result));
+                    var couponObj = JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(coupon.Result));
                     cartDto.CartHeader.DiscountTotal = couponObj.DiscountAmount;
                 }
             }
