@@ -1,6 +1,7 @@
 ﻿using BBQ.Web.Models;
+using BBQ.Web.Services.IServices;
 
-namespace BBQ.Web.Services.IServices;
+namespace BBQ.Web.Services;
 
 public class CouponService : BaseService, ICouponService
 {
