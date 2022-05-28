@@ -1,4 +1,5 @@
-﻿using BBQ.Services.ShoppingCartAPI.Models.Dto;
+﻿using BBQ.Services.ShoppingCartAPI.Messages;
+using BBQ.Services.ShoppingCartAPI.Models.Dto;
 using BBQ.Services.ShoppingCartAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -113,6 +114,29 @@ public class CartAPIController : Controller
         {
             var isSuccess = await _cartRepository.RemoveCoupon(userId);
             _response.Result = isSuccess;
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessages = new List<string> {ex.ToString()};
+        }
+
+        return _response;
+    }
+    
+    [HttpPost("Checkout")]
+    public async Task<object> Checkout(CheckoutHeaderDto checkoutHeader)
+    {
+        try
+        {
+            CartDto cartDto = await _cartRepository.GetCartByUserId(checkoutHeader.UserId);
+            if (cartDto == null)
+            {
+                return BadRequest();
+            }
+
+            checkoutHeader.CartDetails = cartDto.CartDetails;
+            // logic to add message to process order
         }
         catch (Exception ex)
         {
