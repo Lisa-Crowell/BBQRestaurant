@@ -49,12 +49,10 @@ namespace BBQ.Services.ShoppingCartAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CouponCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max");
+                        .HasColumnType("longtext");
 
                     b.HasKey("CartHeaderId");
 
@@ -67,20 +65,17 @@ namespace BBQ.Services.ShoppingCartAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<double>("Price")
                         .HasColumnType("double");

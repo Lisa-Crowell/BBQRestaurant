@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BBQ.Services.ShoppingCartAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220525223202_UpdateProductAndCartModels")]
-    partial class UpdateProductAndCartModels
+    [Migration("20220528020347_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,11 +51,9 @@ namespace BBQ.Services.ShoppingCartAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CouponCode")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("CartHeaderId");
@@ -69,15 +67,12 @@ namespace BBQ.Services.ShoppingCartAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CategoryName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Name")
