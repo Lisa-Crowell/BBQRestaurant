@@ -2,6 +2,7 @@
 using BBQ.Services.ProductAPI.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BBQ.Services.ProductAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220528045738_AddProductModelToDb")]
+    partial class AddProductModelToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,7 +52,6 @@ namespace BBQ.Services.ProductAPI.Migrations
                             ProductId = 1,
                             CategoryName = "Appetizer",
                             Description = "Your choice of 100% Angus beef or chicken sliders with homemade barbeque sauce on a Hawaiian sweetbread bun.<br/>Choose from Sweet and Tangy, Hot and Spicy, or Honey BBQ sauces with your choice of toppings.",
-                            ImageUrl = "https://lisadotnetmastery.blob.core.windows.net/bbq/ImagesForBBQ/sliders.jpg",
                             Name = "BBQ Sliders",
                             Price = 13.99
                         },
@@ -59,7 +60,6 @@ namespace BBQ.Services.ProductAPI.Migrations
                             ProductId = 2,
                             CategoryName = "Appetizer",
                             Description = "What BBQ is complete without a side of Southern Sweet Potato Fries? <br/>Hand breaded and fried to perfection. Choose from Tangy Ranch, Dill BBQ sauce, or Honey Mustard to dip them in. Your mouth will thank you!",
-                            ImageUrl = "https://lisadotnetmastery.blob.core.windows.net/bbq/ImagesForBBQ/sweetpotatofries.jpg",
                             Name = "Sweet Potato Fries",
                             Price = 9.9900000000000002
                         },
@@ -68,7 +68,6 @@ namespace BBQ.Services.ProductAPI.Migrations
                             ProductId = 3,
                             CategoryName = "Dessert",
                             Description = "A flaky crust just like Mama used to make. Enjoy a slice this handed down family recipe, <br/>from our family to ours.",
-                            ImageUrl = "https://lisadotnetmastery.blob.core.windows.net/bbq/ImagesForBBQ/applepie.jpg",
                             Name = "Apple Pie",
                             Price = 10.99
                         },
@@ -77,7 +76,6 @@ namespace BBQ.Services.ProductAPI.Migrations
                             ProductId = 4,
                             CategoryName = "Entree",
                             Description = "Cooked to perfection this beef brisket has been smoking for hours waiting to be enjoyed! <br/>Smoked over hickory and maple chips for a flavor that cannot be beat!",
-                            ImageUrl = "https://lisadotnetmastery.blob.core.windows.net/bbq/ImagesForBBQ/beefbrisket.jpg",
                             Name = "Beef Brisket",
                             Price = 15.99
                         });

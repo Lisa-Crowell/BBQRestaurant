@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BBQ.Services.ProductAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220520010852_SeedProducts")]
+    [Migration("20220528045823_SeedProducts")]
     partial class SeedProducts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,15 +27,12 @@ namespace BBQ.Services.ProductAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CategoryName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Name")
