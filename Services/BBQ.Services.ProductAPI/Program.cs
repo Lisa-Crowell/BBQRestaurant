@@ -1,3 +1,4 @@
+using AutoMapper;
 using BBQ.Services.ProductAPI;
 using BBQ.Services.ProductAPI.DbContexts;
 using BBQ.Services.ProductAPI.Repository;
@@ -17,7 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // add mapping configurations
-var mapper = MappingConfig.RegisterMaps().CreateMapper();
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IProductRepository, ProductRepository>();

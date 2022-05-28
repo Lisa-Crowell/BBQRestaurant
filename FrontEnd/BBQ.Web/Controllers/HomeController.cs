@@ -76,12 +76,12 @@ public class HomeController : Controller
     {
         CartDto cartDto = new()
         {
-            CartHeader = new CartHeaderDto()
+            CartHeader = new CartHeaderDto
             {
                 UserId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value
             }
         };
-        CartDetailsDto cartDetails = new CartDetailsDto()
+        var cartDetails = new CartDetailsDto()
         {
             Count = productDto.Count,
             ProductId = productDto.ProductId

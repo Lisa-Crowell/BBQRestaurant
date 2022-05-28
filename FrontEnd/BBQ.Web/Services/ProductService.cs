@@ -14,7 +14,7 @@ public class ProductService : BaseService, IProductService
 
     public async Task<T> CreateProductAsync<T>(ProductDto productDto, string accessToken)
     {
-        return await SendAsync<T>(new ApiRequest
+        return await this.SendAsync<T>(new ApiRequest()
         {
             ApiType = SD.ApiType.POST,
             Data = productDto,
@@ -25,9 +25,7 @@ public class ProductService : BaseService, IProductService
 
     public async Task<T> DeleteProductAsync<T>(int id, string accessToken)
     {
-
-        Console.WriteLine("Delete product async called");
-        return await SendAsync<T>(new ApiRequest
+        return await this.SendAsync<T>(new ApiRequest
         {
             ApiType = SD.ApiType.DELETE,
             Url = SD.ProductAPIBase + "/api/products/" + id,
@@ -37,7 +35,7 @@ public class ProductService : BaseService, IProductService
 
     public async Task<T> GetAllProductsAsync<T>(string accessToken)
     {
-        return await SendAsync<T>(new ApiRequest
+        return await this.SendAsync<T>(new ApiRequest()
         {
             ApiType = SD.ApiType.GET,
             Url = SD.ProductAPIBase + "/api/products",
@@ -47,7 +45,7 @@ public class ProductService : BaseService, IProductService
 
     public async Task<T> GetProductByIdAsync<T>(int id, string accessToken)
     {
-        return await SendAsync<T>(new ApiRequest
+        return await this.SendAsync<T>(new ApiRequest()
         {
             ApiType = SD.ApiType.GET,
             Url = SD.ProductAPIBase + "/api/products/" + id,
@@ -57,7 +55,7 @@ public class ProductService : BaseService, IProductService
 
     public async Task<T> UpdateProductAsync<T>(ProductDto productDto, string accessToken)
     {
-        return await SendAsync<T>(new ApiRequest
+        return await this.SendAsync<T>(new ApiRequest()
         {
             ApiType = SD.ApiType.PUT,
             Data = productDto,

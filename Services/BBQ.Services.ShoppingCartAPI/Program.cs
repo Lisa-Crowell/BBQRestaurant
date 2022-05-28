@@ -1,5 +1,6 @@
-using BBQ.Services.ShoppingCart;
-using BBQ.Services.ShoppingCart.Repository;
+using AutoMapper;
+using BBQ.Services.ShoppingCartAPI;
+using BBQ.Services.ShoppingCartAPI.Repository;
 using BBQ.Services.ShoppingCartAPI.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -18,11 +19,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // add mapping configurations
-var mapper = MappingConfig.RegisterMaps().CreateMapper();
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddControllers();
+
 var authority = Environment.GetEnvironmentVariable("IDENTITY_SERVER_URL"); //get this to configure file
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
@@ -46,7 +48,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo {Title = "BBQ.Services.BBQ.Services.ShoppingCartAPI", Version = "v1"});
+    c.SwaggerDoc("v1", new OpenApiInfo {Title = "BBQ.Services.ShoppingCartAPI", Version="v1"});
     c.EnableAnnotations();
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -81,12 +83,13 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BBQ.Services.ShoppingCartAPI v1"));
 }
 
 app.UseHttpsRedirection();
-// app.UseRouting(); not sure if this is needed or not yet
+app.UseRouting(); 
 app.UseAuthentication();
 app.UseAuthorization();
 

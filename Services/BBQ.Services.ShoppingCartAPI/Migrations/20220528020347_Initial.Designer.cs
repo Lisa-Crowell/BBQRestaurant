@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BBQ.Services.ShoppingCartAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220524234210_AddProductAndCartModels")]
-    partial class AddProductAndCartModels
+    [Migration("20220528020347_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,7 +20,7 @@ namespace BBQ.Services.ShoppingCartAPI.Migrations
                 .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("BBQ.Services.ShoppingCart.Models.CartDetails", b =>
+            modelBuilder.Entity("BBQ.Services.ShoppingCartAPI.Models.CartDetails", b =>
                 {
                     b.Property<int>("CartDetailsId")
                         .ValueGeneratedOnAdd()
@@ -44,18 +44,16 @@ namespace BBQ.Services.ShoppingCartAPI.Migrations
                     b.ToTable("CartDetails");
                 });
 
-            modelBuilder.Entity("BBQ.Services.ShoppingCart.Models.CartHeader", b =>
+            modelBuilder.Entity("BBQ.Services.ShoppingCartAPI.Models.CartHeader", b =>
                 {
                     b.Property<int>("CartHeaderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("CouponCode")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("CartHeaderId");
@@ -63,21 +61,18 @@ namespace BBQ.Services.ShoppingCartAPI.Migrations
                     b.ToTable("CartHeaders");
                 });
 
-            modelBuilder.Entity("BBQ.Services.ShoppingCart.Models.Product", b =>
+            modelBuilder.Entity("BBQ.Services.ShoppingCartAPI.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<string>("CategoryName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Name")
@@ -92,15 +87,15 @@ namespace BBQ.Services.ShoppingCartAPI.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("BBQ.Services.ShoppingCart.Models.CartDetails", b =>
+            modelBuilder.Entity("BBQ.Services.ShoppingCartAPI.Models.CartDetails", b =>
                 {
-                    b.HasOne("BBQ.Services.ShoppingCart.Models.CartHeader", "CartHeader")
+                    b.HasOne("BBQ.Services.ShoppingCartAPI.Models.CartHeader", "CartHeader")
                         .WithMany()
                         .HasForeignKey("CartHeaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BBQ.Services.ShoppingCart.Models.Product", "Product")
+                    b.HasOne("BBQ.Services.ShoppingCartAPI.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)

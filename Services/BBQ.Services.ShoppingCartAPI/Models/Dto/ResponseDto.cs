@@ -1,4 +1,4 @@
-﻿namespace ShoppingCartAPI.Models.Dto;
+﻿namespace BBQ.Services.ShoppingCartAPI.Models.Dto;
 
 public class ResponseDto
 {

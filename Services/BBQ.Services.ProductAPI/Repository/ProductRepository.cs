@@ -21,9 +21,13 @@ public class ProductRepository : IProductRepository
     {
         var product = _mapper.Map<ProductDto, Product>(productDto);
         if (product.ProductId > 0)
+        {
             _db.Products.Update(product);
+        }
         else
+        {
             _db.Products.Add(product);
+        }
 
         await _db.SaveChangesAsync();
         return _mapper.Map<Product, ProductDto>(product);
@@ -34,16 +38,16 @@ public class ProductRepository : IProductRepository
         try
         {
             var product = await _db.Products.FirstOrDefaultAsync(u => u.ProductId == productId);
-            if (product == null) return false;
+            if (product == null) 
+            {return false;}
 
             _db.Products.Remove(product);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
             return true;
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw;
+            return false;
         }
     }
 
