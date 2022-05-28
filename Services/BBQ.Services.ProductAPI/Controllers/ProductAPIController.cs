@@ -58,7 +58,7 @@ public class ProductApiController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public async Task<object> Post([FromBody] ProductDto productDto)
     {
         try
@@ -77,7 +77,7 @@ public class ProductApiController : ControllerBase
     }
 
     [HttpPut]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public async Task<object> Put([FromBody] ProductDto productDto)
     {
         try
