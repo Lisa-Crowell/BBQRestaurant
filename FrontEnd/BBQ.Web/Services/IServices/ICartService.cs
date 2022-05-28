@@ -10,4 +10,5 @@ public interface ICartService
     Task<T> RemoveFromCartAsync<T>(int cartId, string accessToken = null);
     Task<T> ApplyCoupon<T>(CartDto cartDto, string accessToken = null);
     Task<T> RemoveCoupon<T>(string userId, string accessToken = null);
+    Task<T> Checkout<T>(CartHeaderDto cartHeader, string accessToken = null);
 }
