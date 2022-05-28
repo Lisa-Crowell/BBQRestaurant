@@ -68,6 +68,11 @@ public class CartController : Controller
     {
         return View(await LoadCartDtoBasedOnLoggedInUser());
     }
+    [HttpGet]
+    public async Task<IActionResult> Checkout()
+    {
+        return View(await LoadCartDtoBasedOnLoggedInUser());
+    }
 
     private async Task<CartDto> LoadCartDtoBasedOnLoggedInUser()
     {
