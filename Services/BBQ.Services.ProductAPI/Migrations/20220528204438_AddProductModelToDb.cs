@@ -39,10 +39,10 @@ namespace BBQ.Services.ProductAPI.Migrations
                 columns: new[] { "ProductId", "CategoryName", "Description", "ImageUrl", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, "Appetizer", "Your choice of 100% Angus beef or chicken sliders with homemade barbeque sauce on a Hawaiian sweetbread bun.<br/>Choose from Sweet and Tangy, Hot and Spicy, or Honey BBQ sauces with your choice of toppings.", null, "BBQ Sliders", 13.99 },
-                    { 2, "Appetizer", "What BBQ is complete without a side of Southern Sweet Potato Fries? <br/>Hand breaded and fried to perfection. Choose from Tangy Ranch, Dill BBQ sauce, or Honey Mustard to dip them in. Your mouth will thank you!", null, "Sweet Potato Fries", 9.9900000000000002 },
-                    { 3, "Dessert", "A flaky crust just like Mama used to make. Enjoy a slice this handed down family recipe, <br/>from our family to ours.", null, "Apple Pie", 10.99 },
-                    { 4, "Entree", "Cooked to perfection this beef brisket has been smoking for hours waiting to be enjoyed! <br/>Smoked over hickory and maple chips for a flavor that cannot be beat!", null, "Beef Brisket", 15.99 }
+                    { 1, "Appetizer", "Your choice of 100% Angus beef or chicken sliders with homemade barbeque sauce on a Hawaiian sweetbread bun. Choose from Sweet and Tangy, Hot and Spicy, or Honey BBQ sauces with your choice of toppings.", "https://lisadotnetmastery.blob.core.windows.net/bbq/ImagesForBBQ/sliders2.jpg", "BBQ Sliders", 13.99 },
+                    { 2, "Appetizer", "What BBQ is complete without a side of Southern Sweet Potato Fries? Hand breaded and fried to perfection. Choose from Tangy Ranch, Dill BBQ sauce, or Honey Mustard to dip them in. Your mouth will thank you!", "https://lisadotnetmastery.blob.core.windows.net/bbq/ImagesForBBQ/sweetpotatofries2.jpg", "Sweet Potato Fries", 9.9900000000000002 },
+                    { 3, "Dessert", "A buttery, fall apart in your mouth delicious, flaky crust just like Grandma used to make with sweet and tart apple filling. Enjoy a slice of this multi-generationally handed down family recipe, from our family to ours!", "https://lisadotnetmastery.blob.core.windows.net/bbq/ImagesForBBQ/applepie2.jpg", "Apple Pie", 10.99 },
+                    { 4, "Entree", "Cooked to perfection, this beef brisket has been smoking for hours waiting to be enjoyed! <br/>Smoked over a blend of hickory and maple chips for a flavor that cannot be beat!", "https://lisadotnetmastery.blob.core.windows.net/bbq/ImagesForBBQ/beefbrisket.jpg", "Beef Brisket", 15.99 }
                 });
         }
 
