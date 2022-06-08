@@ -84,9 +84,9 @@ public class ProductController : Controller
         var response = await _productService.GetProductByIdAsync<ResponseDto>(productId, accessToken);
         if (response != null && response.IsSuccess)
         {
-            return RedirectToAction(nameof(ProductIndex));
-            // ProductDto model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
-            // return View(model);
+            // return RedirectToAction(nameof(ProductIndex));
+            ProductDto model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
+            return View(model);
         }
         
         return NotFound();
