@@ -1,4 +1,5 @@
 using AutoMapper;
+using BBQ.MessageBus;
 using BBQ.Services.ShoppingCartAPI;
 using BBQ.Services.ShoppingCartAPI.Repository;
 using BBQ.Services.ShoppingCartAPI.DbContexts;
@@ -23,6 +24,7 @@ IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
 builder.Services.AddControllers();
 
 var authority = Environment.GetEnvironmentVariable("IDENTITY_SERVER_URL"); //get this to configure file
