@@ -10,6 +10,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.ShoppingCartAP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.CouponAPI", "Services\BBQ.Services.CouponAPI\BBQ.Services.CouponAPI.csproj", "{D3E15838-CF2B-4664-B707-BCF1CB4601C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.ProductAPI.Tests", "Services\BBQ.Services.ProductAPI.Tests\BBQ.Services.ProductAPI.Tests.csproj", "{E8129730-7324-4CC3-A60A-D7FFA7F6BB28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.WebTests", "FrontEnd\BBQ.WebTests\BBQ.WebTests.csproj", "{766FEB8C-E380-49C5-9891-B3495337C1A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.ShoppingCartAPI.Tests", "Services\BBQ.Services.ShoppingCartAPI.Tests\BBQ.Services.ShoppingCartAPI.Tests.csproj", "{EE5D2675-C9D8-4D44-8573-3BDB1F27946F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.CouponAPI.Tests", "Services\BBQ.Services.CouponAPI.Tests\BBQ.Services.CouponAPI.Tests.csproj", "{055744F3-47E8-4D3F-9D68-A2370CFAC55F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.Identity.Tests", "Services\BBQ.Services.Identity.Tests\BBQ.Services.Identity.Tests.csproj", "{DF3A8C6D-BEC3-4FCD-A72E-454C5E1EA825}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,5 +50,25 @@ Global
 		{D3E15838-CF2B-4664-B707-BCF1CB4601C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3E15838-CF2B-4664-B707-BCF1CB4601C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3E15838-CF2B-4664-B707-BCF1CB4601C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8129730-7324-4CC3-A60A-D7FFA7F6BB28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8129730-7324-4CC3-A60A-D7FFA7F6BB28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8129730-7324-4CC3-A60A-D7FFA7F6BB28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8129730-7324-4CC3-A60A-D7FFA7F6BB28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{766FEB8C-E380-49C5-9891-B3495337C1A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{766FEB8C-E380-49C5-9891-B3495337C1A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{766FEB8C-E380-49C5-9891-B3495337C1A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{766FEB8C-E380-49C5-9891-B3495337C1A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE5D2675-C9D8-4D44-8573-3BDB1F27946F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE5D2675-C9D8-4D44-8573-3BDB1F27946F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE5D2675-C9D8-4D44-8573-3BDB1F27946F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE5D2675-C9D8-4D44-8573-3BDB1F27946F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{055744F3-47E8-4D3F-9D68-A2370CFAC55F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{055744F3-47E8-4D3F-9D68-A2370CFAC55F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{055744F3-47E8-4D3F-9D68-A2370CFAC55F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{055744F3-47E8-4D3F-9D68-A2370CFAC55F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF3A8C6D-BEC3-4FCD-A72E-454C5E1EA825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF3A8C6D-BEC3-4FCD-A72E-454C5E1EA825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF3A8C6D-BEC3-4FCD-A72E-454C5E1EA825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF3A8C6D-BEC3-4FCD-A72E-454C5E1EA825}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
