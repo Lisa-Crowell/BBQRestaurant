@@ -1,18 +1,20 @@
-﻿FROM mcr.microsoft.com/dotnet/runtime:6.0 AS base
+﻿FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
+EXPOSE 80
+EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Services/BBQ.Services.OrderAPI/BBQ.Services.OrderAPI.csproj", "BBQ.Services.OrderAPI/"]
-RUN dotnet restore "Services/BBQ.Services.OrderAPI/BBQ.Services.OrderAPI.csproj"
+COPY ["Services/test/test.csproj", "test/"]
+RUN dotnet restore "Services/test/test.csproj"
 COPY . .
-WORKDIR "/src/BBQ.Services.OrderAPI"
-RUN dotnet build "BBQ.Services.OrderAPI.csproj" -c Release -o /app/build
+WORKDIR "/src/test"
+RUN dotnet build "test.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "BBQ.Services.OrderAPI.csproj" -c Release -o /app/publish
+RUN dotnet publish "test.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "BBQ.Services.OrderAPI.dll"]
+ENTRYPOINT ["dotnet", "test.dll"]
