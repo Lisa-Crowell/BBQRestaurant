@@ -1,12 +1,10 @@
-﻿using AutoMapper;
+using AutoMapper;
 using BBQ.Services.OrderAPI;
 using BBQ.Services.OrderAPI.Repository;
 using BBQ.Services.OrderAPI.DbContexts;
-using Microsoft.AspNetCore.Builder;
+using BBQ.Services.OrderAPI.Extension;
+using BBQ.Services.OrderAPI.Messaging;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -22,13 +20,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // add mapping configurations
-// IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-// builder.Services.AddSingleton(mapper);
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 // builder.Services.AddScoped<IOrderRepository, OrderRepository>(); <- no longer needed b/c added singleton
 var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
 optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+
 builder.Services.AddSingleton(new OrderRepository(optionBuilder.Options));
+builder.Services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
 
 builder.Services.AddControllers();
 
@@ -100,5 +101,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseAzureServiceBusConsumer();
 app.Run();

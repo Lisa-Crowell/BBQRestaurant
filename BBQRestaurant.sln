@@ -22,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.Identity.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.MessageBus", "Integration\BBQ.MessageBus\BBQ.MessageBus.csproj", "{D9DDE642-FB2B-43AC-A432-9819CF02A692}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.OrderAPI", "Services\BBQ.Services.OrderAPI\BBQ.Services.OrderAPI.csproj", "{51B5E18E-5215-44AE-855E-87894B75F672}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.OrderAPI", "Services\BBQ.Services.OrderAPI\BBQ.Services.OrderAPI.csproj", "{48371D75-FE56-486B-A352-BAE0C42900C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,9 +78,9 @@ Global
 		{D9DDE642-FB2B-43AC-A432-9819CF02A692}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9DDE642-FB2B-43AC-A432-9819CF02A692}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9DDE642-FB2B-43AC-A432-9819CF02A692}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51B5E18E-5215-44AE-855E-87894B75F672}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51B5E18E-5215-44AE-855E-87894B75F672}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51B5E18E-5215-44AE-855E-87894B75F672}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51B5E18E-5215-44AE-855E-87894B75F672}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48371D75-FE56-486B-A352-BAE0C42900C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48371D75-FE56-486B-A352-BAE0C42900C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48371D75-FE56-486B-A352-BAE0C42900C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48371D75-FE56-486B-A352-BAE0C42900C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
