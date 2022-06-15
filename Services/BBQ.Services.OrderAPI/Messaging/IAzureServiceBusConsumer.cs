@@ -2,6 +2,6 @@
 
 public interface IAzureServiceBusConsumer
 {
-    public Task Start();
-    public Task Stop();
+    Task Start();
+    Task Stop();
 }
