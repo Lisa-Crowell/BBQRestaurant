@@ -1,4 +1,5 @@
-﻿using BBQ.Services.ShoppingCartAPI.Messages;
+﻿using BBQ.MessageBus;
+using BBQ.Services.ShoppingCartAPI.Messages;
 using BBQ.Services.ShoppingCartAPI.Models.Dto;
 using BBQ.Services.ShoppingCartAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ public class CartAPIController : Controller
 {
     private readonly ICartRepository _cartRepository;
 
+    private readonly IMessageBus _messageBus;
     // private readonly ICouponRepository _couponRepository;
     protected ResponseDto _response;
 
@@ -136,7 +138,8 @@ public class CartAPIController : Controller
             }
 
             checkoutHeader.CartDetails = cartDto.CartDetails;
-            // logic to add message to process order
+          
+            await _messageBus.PublishMessage(checkoutHeader, "checkoutmessagetopic");
         }
         catch (Exception ex)
         {
