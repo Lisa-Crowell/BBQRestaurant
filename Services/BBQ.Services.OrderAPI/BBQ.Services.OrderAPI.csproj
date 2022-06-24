@@ -29,4 +29,8 @@
             <Folder Include="DbContexts" />
         </ItemGroup>
 
+        <ItemGroup>
+          <ProjectReference Include="..\..\Integration\BBQ.MessageBus\BBQ.MessageBus.csproj" />
+        </ItemGroup>
+
 </Project>
