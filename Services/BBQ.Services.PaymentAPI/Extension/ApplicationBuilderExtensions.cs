@@ -1,4 +1,4 @@
-﻿using BBQ.Services.OrderAPI.Messaging;
+﻿using BBQ.Services.PaymentAPI.Messaging;
 
 namespace BBQ.Services.PaymentAPI.Extension;
 
