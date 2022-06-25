@@ -7,4 +7,10 @@
         <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     </PropertyGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\..\Integration\BBQ.MessageBus\BBQ.MessageBus.csproj" />
+        <ProjectReference Include="..\..\Payments\PaymentProcessor\PaymentProcessor.csproj" />
+        <ProjectReference Include="..\BBQ.Services.OrderAPI\BBQ.Services.OrderAPI.csproj" />
+    </ItemGroup>
+
 </Project>
