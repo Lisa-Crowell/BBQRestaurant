@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using Azure.Messaging.ServiceBus;
-// using BBQ.MessageBus;
+using BBQ.MessageBus;
 using BBQ.Services.OrderAPI.Messages;
 using BBQ.Services.OrderAPI.Models;
 using BBQ.Services.OrderAPI.Repository;
@@ -13,23 +13,25 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
     private readonly string serviceBusConnectionString;
     private readonly string subscriptionCheckout;
     private readonly string checkoutMessageTopic;
+    private readonly string orderPaymentProcessTopic;
     
     private readonly OrderRepository _orderRepository;
 
     private ServiceBusProcessor checkoutProcessor;
     
     private readonly IConfiguration _configuration;
-    // private readonly IMessageBus _messageBus;
+    private readonly IMessageBus _messageBus;
     
-    public AzureServiceBusConsumer(OrderRepository orderRepository, IConfiguration configuration)
+    public AzureServiceBusConsumer(OrderRepository orderRepository, IConfiguration configuration, IMessageBus messageBus)
     {
         _orderRepository = orderRepository;
         _configuration = configuration;
-        // _messageBus = messageBus;
+        _messageBus = messageBus;
 
         serviceBusConnectionString = _configuration.GetValue<string>("ServiceBusConnectionString");
         subscriptionCheckout = _configuration.GetValue<string>("SubscriptionCheckout");
         checkoutMessageTopic = _configuration.GetValue<string>("CheckoutMessageTopic");
+        orderPaymentProcessTopic = _configuration.GetValue<string>("OrderPaymentProcessTopic");
 
         var client = new ServiceBusClient(serviceBusConnectionString);
 
@@ -96,5 +98,25 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
         }
 
         await _orderRepository.AddOrder(orderHeader);
+
+        PaymentRequestMessage paymentRequestMessage = new()
+        {
+            Name = orderHeader.FirstName + " " + orderHeader.LastName,
+            CardNumber = orderHeader.CardNumber,
+            CVV = orderHeader.CVV,
+            ExpiryMonthYear = orderHeader.ExpiryMonthYear,
+            OrderId = orderHeader.OrderHeaderId,
+            OrderTotal = orderHeader.OrderTotal
+        };
+        try
+        {
+            await _messageBus.PublishMessage(paymentRequestMessage, orderPaymentProcessTopic);
+            await args.CompleteMessageAsync(args.Message);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }
