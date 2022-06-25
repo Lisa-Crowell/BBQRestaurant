@@ -1,4 +1,5 @@
 using AutoMapper;
+using BBQ.MessageBus;
 using BBQ.Services.OrderAPI;
 using BBQ.Services.OrderAPI.Repository;
 using BBQ.Services.OrderAPI.DbContexts;
@@ -20,16 +21,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // add mapping configurations
-IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-builder.Services.AddSingleton(mapper);
+// IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+// builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-// builder.Services.AddScoped<IOrderRepository, OrderRepository>(); <- no longer needed b/c added singleton
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
 optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 builder.Services.AddSingleton(new OrderRepository(optionBuilder.Options));
 builder.Services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
+builder.Services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
 
 builder.Services.AddControllers();
 
