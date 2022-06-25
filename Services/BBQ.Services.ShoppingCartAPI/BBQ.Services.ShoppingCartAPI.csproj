@@ -41,4 +41,8 @@
         <Folder Include="Models\Dto\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Integration\BBQ.MessageBus\BBQ.MessageBus.csproj" />
+    </ItemGroup>
+
 </Project>

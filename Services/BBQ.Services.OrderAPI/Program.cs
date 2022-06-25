@@ -1,8 +1,10 @@
 using AutoMapper;
 using BBQ.MessageBus;
-using BBQ.Services.ShoppingCartAPI;
-using BBQ.Services.ShoppingCartAPI.Repository;
-using BBQ.Services.ShoppingCartAPI.DbContexts;
+using BBQ.Services.OrderAPI;
+using BBQ.Services.OrderAPI.Repository;
+using BBQ.Services.OrderAPI.DbContexts;
+using BBQ.Services.OrderAPI.Extension;
+using BBQ.Services.OrderAPI.Messaging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -11,8 +13,7 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
-
+builder.Services.AddControllersWithViews();
 
 // get the connection string
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -20,15 +21,19 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // add mapping configurations
-IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-builder.Services.AddSingleton(mapper);
+// IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+// builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddScoped<ICartRepository, CartRepository>();
-builder.Services.AddScoped<ICouponRepository, CouponRepository>();
+
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+
+builder.Services.AddSingleton(new OrderRepository(optionBuilder.Options));
+builder.Services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
 builder.Services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
+
 builder.Services.AddControllers();
-builder.Services.AddHttpClient<ICouponRepository, CouponRepository>(u => u.BaseAddress =
-    new Uri(builder.Configuration["ServiceUrls:CouponAPI"]));
 
 var authority = Environment.GetEnvironmentVariable("IDENTITY_SERVER_URL"); //get this to configure file
 builder.Services.AddAuthentication("Bearer")
@@ -53,7 +58,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo {Title = "BBQ.Services.ShoppingCartAPI", Version="v1"});
+    c.SwaggerDoc("v1", new OpenApiInfo {Title = "BBQ.Services.OrderAPI"});
     c.EnableAnnotations();
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -88,9 +93,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BBQ.Services.ShoppingCartAPI v1"));
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
@@ -99,5 +103,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseAzureServiceBusConsumer();
 app.Run();

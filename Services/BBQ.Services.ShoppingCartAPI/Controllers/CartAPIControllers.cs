@@ -1,4 +1,5 @@
-﻿using BBQ.Services.ShoppingCartAPI.Messages;
+﻿using BBQ.MessageBus;
+using BBQ.Services.ShoppingCartAPI.Messages;
 using BBQ.Services.ShoppingCartAPI.Models.Dto;
 using BBQ.Services.ShoppingCartAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +12,15 @@ public class CartAPIController : Controller
 {
     private readonly ICartRepository _cartRepository;
 
-    // private readonly ICouponRepository _couponRepository;
+    private readonly IMessageBus _messageBus;
+    private readonly ICouponRepository _couponRepository;
     protected ResponseDto _response;
 
-    public CartAPIController(ICartRepository cartRepository)
+    public CartAPIController(ICartRepository cartRepository, IMessageBus messageBus, ICouponRepository couponRepository)
     {
         _cartRepository = cartRepository;
+        _messageBus = messageBus;
+        _couponRepository = couponRepository;
 
         _response = new ResponseDto();
     }
@@ -129,14 +133,30 @@ public class CartAPIController : Controller
     {
         try
         {
-            CartDto cartDto = await _cartRepository.GetCartByUserId(checkoutHeader.UserId);
+            var cartDto = await _cartRepository.GetCartByUserId(checkoutHeader.UserId);
             if (cartDto == null)
             {
                 return BadRequest();
             }
 
+            if (!string.IsNullOrEmpty(checkoutHeader.CouponCode))
+            {
+                CouponDto coupon = await _couponRepository.GetCoupon(checkoutHeader.CouponCode);
+                if (checkoutHeader.DiscountTotal != coupon.DiscountAmount)
+                {
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages = new List<string>
+                        {"Coupon discount has changed, please confirm the change."};
+                    _response.DisplayMessage = "Coupon discount has changed, please confirm the change.";
+                    return _response;
+                }
+            }
+
             checkoutHeader.CartDetails = cartDto.CartDetails;
             // logic to add message to process order
+
+            await _messageBus.PublishMessage(checkoutHeader, "checkoutmessagetopic");
+            await _cartRepository.ClearCart(checkoutHeader.UserId);
         }
         catch (Exception ex)
         {

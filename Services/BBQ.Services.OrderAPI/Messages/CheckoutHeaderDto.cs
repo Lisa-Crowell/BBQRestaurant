@@ -1,11 +1,8 @@
-﻿using BBQ.MessageBus;
-using BBQ.Services.ShoppingCartAPI.Models.Dto;
+﻿namespace BBQ.Services.OrderAPI.Messages;
 
-namespace BBQ.Services.ShoppingCartAPI.Messages;
-
-public class CheckoutHeaderDto : BaseMessage
+public class CheckoutHeaderDto
 {
-    public int CartHeaderId { get; set; } 
+    public int CartHeaderId { get; set; }
     public string UserId { get; set; }
     public string CouponCode { get; set; }
     public double OrderTotal { get; set; }
