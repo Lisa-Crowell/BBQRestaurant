@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.OrderAPI", "Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentProcessor", "Payments\PaymentProcessor\PaymentProcessor.csproj", "{CEDE6AD8-F7B3-47B6-8020-8FA6CF8BC93F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.PaymentAPI", "Services\BBQ.Services.PaymentAPI\BBQ.Services.PaymentAPI.csproj", "{297E7F3D-70FE-4908-9A2D-F209AFE359FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,5 +90,9 @@ Global
 		{CEDE6AD8-F7B3-47B6-8020-8FA6CF8BC93F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEDE6AD8-F7B3-47B6-8020-8FA6CF8BC93F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEDE6AD8-F7B3-47B6-8020-8FA6CF8BC93F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{297E7F3D-70FE-4908-9A2D-F209AFE359FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{297E7F3D-70FE-4908-9A2D-F209AFE359FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{297E7F3D-70FE-4908-9A2D-F209AFE359FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{297E7F3D-70FE-4908-9A2D-F209AFE359FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
