@@ -38,7 +38,7 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
 
         var client = new ServiceBusClient(serviceBusConnectionString);
 
-        checkoutProcessor = client.CreateProcessor(checkoutMessageTopic, subscriptionCheckout);
+        checkoutProcessor = client.CreateProcessor(checkoutMessageTopic);
         orderUpdateStatusProcessor = client.CreateProcessor(orderUpdatePaymentResultTopic, subscriptionCheckout);
     }
 
