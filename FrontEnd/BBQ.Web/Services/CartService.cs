@@ -82,7 +82,7 @@ public class CartService : BaseService, ICartService
         {
             ApiType = SD.ApiType.POST,
             Data = cartHeader,
-            Url = SD.ShoppingCartAPIBase + "api/cart/Checkout",
+            Url = SD.ShoppingCartAPIBase + "/api/cart/Checkout",
             AccessToken = accessToken
         });
     }
