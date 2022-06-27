@@ -19,7 +19,7 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
     private readonly OrderRepository _orderRepository;
 
     private ServiceBusProcessor checkoutProcessor;
-    private ServiceBusProcessor orderUpdateStatusProcessor;
+    private ServiceBusProcessor orderUpdatePaymentStatusProcessor;
     
     private readonly IConfiguration _configuration;
     private readonly IMessageBus _messageBus;
@@ -39,7 +39,7 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
         var client = new ServiceBusClient(serviceBusConnectionString);
 
         checkoutProcessor = client.CreateProcessor(checkoutMessageTopic);
-        orderUpdateStatusProcessor = client.CreateProcessor(orderUpdatePaymentResultTopic, subscriptionCheckout);
+        orderUpdatePaymentStatusProcessor = client.CreateProcessor(orderUpdatePaymentResultTopic, subscriptionCheckout);
     }
 
     public async Task Start()
@@ -48,17 +48,17 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
         checkoutProcessor.ProcessErrorAsync += OnCheckOutErrorHandler;
         await checkoutProcessor.StartProcessingAsync();
         
-        orderUpdateStatusProcessor.ProcessMessageAsync += OnOrderPaymentUpdateReceived;
-        orderUpdateStatusProcessor.ProcessErrorAsync += OnCheckOutErrorHandler;
-        await orderUpdateStatusProcessor.StartProcessingAsync();
+        orderUpdatePaymentStatusProcessor.ProcessMessageAsync += OnOrderPaymentUpdateReceived;
+        orderUpdatePaymentStatusProcessor.ProcessErrorAsync += OnCheckOutErrorHandler;
+        await orderUpdatePaymentStatusProcessor.StartProcessingAsync();
     }
     public async Task Stop()
     {
         await checkoutProcessor.StopProcessingAsync();
         await checkoutProcessor.DisposeAsync();
         
-        await orderUpdateStatusProcessor.StopProcessingAsync();
-        await orderUpdateStatusProcessor.DisposeAsync();
+        await orderUpdatePaymentStatusProcessor.StopProcessingAsync();
+        await orderUpdatePaymentStatusProcessor.DisposeAsync();
     }
 
     Task OnCheckOutErrorHandler(ProcessErrorEventArgs args)
