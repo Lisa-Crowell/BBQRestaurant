@@ -12,7 +12,7 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
 {
     private readonly string serviceBusConnectionString;
     private readonly string subscriptionCheckout;
-    private readonly string checkoutMessageTopic;
+    private readonly string checkoutMessageQueue;
     private readonly string orderPaymentProcessTopic;
     private readonly string orderUpdatePaymentResultTopic;
     
@@ -32,13 +32,13 @@ public class AzureServiceBusConsumer : IAzureServiceBusConsumer
 
         serviceBusConnectionString = _configuration.GetValue<string>("ServiceBusConnectionString");
         subscriptionCheckout = _configuration.GetValue<string>("SubscriptionCheckout");
-        checkoutMessageTopic = _configuration.GetValue<string>("CheckoutMessageTopic");
+        checkoutMessageQueue = _configuration.GetValue<string>("CheckoutMessageQueue");
         orderPaymentProcessTopic = _configuration.GetValue<string>("OrderPaymentProcessTopic");
         orderUpdatePaymentResultTopic = _configuration.GetValue<string>("OrderUpdatePaymentResultTopic");
 
         var client = new ServiceBusClient(serviceBusConnectionString);
 
-        checkoutProcessor = client.CreateProcessor(checkoutMessageTopic);
+        checkoutProcessor = client.CreateProcessor(checkoutMessageQueue);
         orderUpdatePaymentStatusProcessor = client.CreateProcessor(orderUpdatePaymentResultTopic, subscriptionCheckout);
     }
 
