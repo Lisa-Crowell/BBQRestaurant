@@ -21,7 +21,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IEmailRepository, EmailRepository>();
 var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+optionBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 
 builder.Services.AddSingleton(new EmailRepository(optionBuilder.Options));
 builder.Services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
@@ -29,7 +29,7 @@ builder.Services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo 
-    {Title = "BBQ.Services.OrderAPI"}); });
+    {Title = "BBQ.Services.EmailAPI"}); });
 
 
 var app = builder.Build();
