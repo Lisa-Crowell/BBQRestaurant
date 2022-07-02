@@ -17,7 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // add mapping configurations
 // IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 // builder.Services.AddSingleton(mapper);
-//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+// builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IEmailRepository, EmailRepository>();
 var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
