@@ -154,8 +154,9 @@ public class CartAPIController : Controller
 
             checkoutHeader.CartDetails = cartDto.CartDetails;
             // logic to add message to process order
+            string checkoutMessageQueue = Environment.GetEnvironmentVariable("CheckoutMessageQueue");
 
-            await _messageBus.PublishMessage(checkoutHeader, "checkoutmessagetopic");
+            await _messageBus.PublishMessage(checkoutHeader, checkoutMessageQueue);
             await _cartRepository.ClearCart(checkoutHeader.UserId);
         }
         catch (Exception ex)

@@ -24,6 +24,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.MessageBus", "Integrati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.OrderAPI", "Services\BBQ.Services.OrderAPI\BBQ.Services.OrderAPI.csproj", "{48371D75-FE56-486B-A352-BAE0C42900C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentProcessor", "Payments\PaymentProcessor\PaymentProcessor.csproj", "{CEDE6AD8-F7B3-47B6-8020-8FA6CF8BC93F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.PaymentAPI", "Services\BBQ.Services.PaymentAPI\BBQ.Services.PaymentAPI.csproj", "{297E7F3D-70FE-4908-9A2D-F209AFE359FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBQ.Services.Email", "Services\BBQ.Services.Email\BBQ.Services.Email.csproj", "{12E7F01C-39C0-4E01-AB3A-4D7497C3A129}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,5 +88,17 @@ Global
 		{48371D75-FE56-486B-A352-BAE0C42900C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48371D75-FE56-486B-A352-BAE0C42900C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48371D75-FE56-486B-A352-BAE0C42900C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEDE6AD8-F7B3-47B6-8020-8FA6CF8BC93F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEDE6AD8-F7B3-47B6-8020-8FA6CF8BC93F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEDE6AD8-F7B3-47B6-8020-8FA6CF8BC93F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEDE6AD8-F7B3-47B6-8020-8FA6CF8BC93F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{297E7F3D-70FE-4908-9A2D-F209AFE359FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{297E7F3D-70FE-4908-9A2D-F209AFE359FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{297E7F3D-70FE-4908-9A2D-F209AFE359FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{297E7F3D-70FE-4908-9A2D-F209AFE359FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12E7F01C-39C0-4E01-AB3A-4D7497C3A129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12E7F01C-39C0-4E01-AB3A-4D7497C3A129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12E7F01C-39C0-4E01-AB3A-4D7497C3A129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12E7F01C-39C0-4E01-AB3A-4D7497C3A129}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
