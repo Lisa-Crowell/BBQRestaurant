@@ -16,7 +16,7 @@ public class EmailRepository : IEmailRepository
 
     public async Task SendAndLogEmail(UpdatePaymentResultMessage message)
     {
-       
+        // TODO implement an email sender or call another class library to implement that
         EmailLog emailLog = new EmailLog()
         {
             Email = message.Email,
