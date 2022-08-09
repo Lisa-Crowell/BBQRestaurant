@@ -1,0 +1,74 @@
+﻿version: 3
+services:
+  web:
+    ports:
+      - "80:5041"
+      - "443:7040"
+    environment:
+      - 
+    networks:
+      - bbq-network
+    depends_on:
+      - dotnet.db
+  product-service:
+    environment:
+      -
+    networks:
+      - bbq-network
+    depends_on:
+      - dotnet.db
+  identity-service:
+    environment:
+      -
+    networks:
+      - bbq-network
+    depends_on:
+      - dotnet.db
+  order-service:
+    environment:
+      -
+    networks:
+      - bbq-network
+    depends_on:
+      - dotnet.db
+  cart-service:
+    environment:
+      -
+    networks:
+      - bbq-network
+    depends_on:
+      - dotnet.db
+  coupon-service:
+    environment:
+      -
+    networks:
+      - bbq-network
+    depends_on:
+      - dotnet.db
+  payment-service:
+    environment:
+      -
+    networks:
+      - bbq-network
+    depends_on:
+      - dotnet.db
+  email-service:
+    environment:
+      -
+    networks:
+      - bbq-network
+    depends_on:
+      - dotnet.db
+  dotnet.db:
+    image: mariadb:latest    
+    environment:
+      MARIADB_ROOT_USER: ${MARIADB_ROOT_USER}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+    volumes:
+      - ./db:/db
+    networks:
+      - bbq-network
+networks:
+  bbq-network:
+    driver: bridge
+    
